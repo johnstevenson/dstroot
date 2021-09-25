@@ -10,4 +10,4 @@ subjectKeyIdentifier = hash
 authorityKeyIdentifier = keyid:always,issuer
 keyUsage = nonRepudiation,digitalSignature,keyEncipherment
 extendedKeyUsage = clientAuth,serverAuth
-subjectAltName = DNS:certchain.testing.org
+subjectAltName = DNS:dstroot.testing.org

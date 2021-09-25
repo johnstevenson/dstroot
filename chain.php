@@ -14,12 +14,12 @@ $builder = new CertBuilder();
 // Create root ca certificates
 $config = ['config' =>  __DIR__.'/openssl-ca.cnf'];
 
-$dn = $builder->makeDn('Fake ISRG Root X1', 'Fake Internet Security Research Group');
+$dn = $builder->makeDn('Mock ISRG Root X1', 'Not Internet Security Research Group');
 list($isrgCrs, $isrgKey) = $builder->createCsr($dn, $config);
 $isrgCert = $builder->signCsr($isrgCrs, null, $isrgKey, 3650, 1001, $config);
 $builder->saveCert($isrgCert, ISRG_ROOT_X1);
 
-$dn = $builder->makeDn('Fake DST Root CA X3', 'Fake Digital Signature Trust Co');
+$dn = $builder->makeDn('Mock DST Root CA X3', 'Not Digital Signature Trust Co');
 list($dstCrs, $dstKey) = $builder->createCsr($dn, $config);
 $dstCert = $builder->signCsr($dstCrs, null, $dstKey, 0, 10001, $config);
 $builder->saveCert($dstCert, DST_ROOT_CA_X3);
@@ -31,7 +31,7 @@ $builder->saveCert($isrgCrossCert, ISRG_ROOT_X1_CROSS);
 // Create intermediate R3 ca certificate
 $config = ['config' => __DIR__.'/openssl-ica.cnf'];
 
-$dn = $builder->makeDn('R3', 'Fake Lets Encrypt');
+$dn = $builder->makeDn('Mock R3', "Not Let's Encrypt");
 list($r3Crs, $r3Key) = $builder->createCsr($dn, $config);
 $r3Cert = $builder->signCsr($r3Crs, $isrgCert, $isrgKey, 365, 2001, $config);
 $builder->saveCert($r3Cert, INTERMEDIATE_R3);
@@ -39,7 +39,7 @@ $builder->saveCert($r3Cert, INTERMEDIATE_R3);
 // Create server certificate
 $config = ['config' => __DIR__.'/openssl-server.cnf'];
 
-$dn = $builder->makeDn('certchain.testing.org', 'Certchain Testing Org');
+$dn = $builder->makeDn('dstroot.testing.org', 'DstRoot Testing Org');
 list($serverCrs, $serverKey) = $builder->createCsr($dn, $config);
 
 $serverCert = $builder->signCsr($serverCrs, $r3Cert, $r3Key, 90, 3001, $config);

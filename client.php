@@ -33,7 +33,7 @@ if (extension_loaded('curl')) {
 
 echo $version, PHP_EOL;
 
-$targetUrl = 'https://certchain.testing.org';
+$targetUrl = 'https://dstroot.testing.org';
 $certs = [__DIR__.'/certs/bundle_both.crt', __DIR__.'/certs/bundle_root.crt'];
 
 foreach ($certs as $bundle) {
