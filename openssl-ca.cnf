@@ -1,0 +1,11 @@
+default_bits = 2048
+distinguished_name = dn
+x509_extensions = v3_ca
+
+[dn]
+
+[v3_ca]
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer
+basicConstraints = critical,CA:true
+keyUsage = keyCertSign,cRLSign
