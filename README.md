@@ -113,7 +113,7 @@ Certificate chain
 ```
 
 ## Testing PHP
-Run `client.php` to test different PHP versions. The script sends a request to
+Run `client.php` to test different PHP versions. The script makes a request to
 `https://dstroot.testing.org` using PHP streams and PHP curl, reporting either FAIL or SUCCESS.
 
 Remember to restart the web server when switching between the default and alternate chains.

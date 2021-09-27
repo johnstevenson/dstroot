@@ -39,7 +39,7 @@ $builder->saveCert($r3Cert, INTERMEDIATE_R3);
 // Create server certificate
 $config = ['config' => __DIR__.'/openssl-server.cnf'];
 
-$dn = $builder->makeDn('dstroot.testing.org', 'DstRoot Testing Org');
+$dn = $builder->makeDn('dstroot.testing.org');
 list($serverCrs, $serverKey) = $builder->createCsr($dn, $config);
 
 $serverCert = $builder->signCsr($serverCrs, $r3Cert, $r3Key, 90, 3001, $config);

@@ -10,18 +10,15 @@ set_error_handler(function ($errno, $errstr) use (&$errors) {
     $errors[] = $errstr;
 });
 
-echo 'PHP Version: ', PHP_VERSION, PHP_EOL;
-echo 'OpenSSL version: ';
+// output PHP, OpenSSL and Curl versions
+$output = array(sprintf('PHP version: %s', PHP_VERSION));
 
 if (extension_loaded('openssl')) {
     $version = OPENSSL_VERSION_TEXT;
 } else {
     $version = 'Missing';
 }
-
-echo $version, PHP_EOL;
-
-echo 'cURL version: ';
+$output[] = sprintf('OpenSSL version: %s', $version);
 
 if (extension_loaded('curl')) {
     $info = curl_version();
@@ -30,9 +27,11 @@ if (extension_loaded('curl')) {
 } else {
     $version = 'Missing';
 }
+$output[] = sprintf('cURL version: %s', $version);
 
-echo $version, PHP_EOL;
+echo implode(PHP_EOL, $output), PHP_EOL;
 
+// make requests
 $targetUrl = 'https://dstroot.testing.org';
 $certs = [__DIR__.'/certs/bundle_both.crt', __DIR__.'/certs/bundle_root.crt'];
 

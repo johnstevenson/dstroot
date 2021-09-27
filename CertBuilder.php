@@ -9,14 +9,14 @@ class CertBuilder
     public function __construct()
     {
         $this->certDir = __DIR__.DIRECTORY_SEPARATOR.'certs';
-        $this->certOptions = [
+        $this->certOptions = array(
             'digest_alg' => 'sha256',
-        ];
+        );
 
-        $this->keyOptions = [
+        $this->keyOptions = array(
             'private_key_bits' => 2048,
             'private_key_type' => OPENSSL_KEYTYPE_RSA
-        ];
+        );
     }
 
     public function createCsr(array $dn, array $config, $key = null)
@@ -49,7 +49,7 @@ class CertBuilder
 
     public function createBundle(array $certNames, $name)
     {
-        $certs = [];
+        $certs = array();
 
         foreach ($certNames as $filename) {
             $path = $this->certDir.DIRECTORY_SEPARATOR.$filename;
@@ -78,13 +78,18 @@ class CertBuilder
         }
     }
 
-    public function makeDn($commonName, $orgName)
+    public function makeDn($commonName, $orgName = '')
     {
-        return [
+        $dn = array(
             'countryName' => 'US',
-            'organizationName' => $orgName,
             'commonName' => $commonName,
-        ];
+        );
+
+        if ($orgName) {
+            $dn['organizationName'] = $orgName;
+        }
+
+        return $dn;
     }
 
     public function saveCert($cert, $filename)
